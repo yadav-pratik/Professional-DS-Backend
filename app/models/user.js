@@ -37,9 +37,9 @@ const userSchema = new Schema({
         default : 'customer',
         required : true
     },
-    category : {
-        type : Schema.Types.ObjectId,
-        ref : 'Category',
+    expertise : {
+        type : String,
+        enum : ['painter','electrical','plumber','carpenter'],
         default : null
     },
     address : {
@@ -49,7 +49,7 @@ const userSchema = new Schema({
     picture : {
         type : String
     }
-})
+},{timestamps : true})
 
 const User = mongoose.model('User', userSchema)
 
