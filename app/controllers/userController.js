@@ -1,5 +1,8 @@
 const User = require('../models/user')
 const { pick } = require('lodash')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const userController = {}
 
@@ -25,6 +28,32 @@ userController.register = async (req, res) => {
                 res.json(error)
             }
         }  
+    }
+}
+
+userController.login = async (req, res) => {
+    const body = pick(req.body, ['email', 'password'])
+    try {
+        const user = await User.findOne({email : body.email})
+        if(user){
+            const match = await bcrypt.compare(body.password, user.password)
+            if(match){
+                const token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_SECRET_KEY, {expiresIn : "7d"})
+                res.json({
+                    token : `Bearer ${token}`
+                })
+            } else {
+                res.json({
+                    notice : "Invalid email or password"
+                })
+            }
+        } else {
+            res.json({
+                notice : "Invalid email or password"
+            })
+        }
+    } catch (error) {
+        res.json(error)
     }
 }
 
