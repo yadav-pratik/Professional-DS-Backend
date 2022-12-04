@@ -16,6 +16,6 @@ router.get('/api/user/account', authenticatUser, userController.account)
 //service apis
 
 router.post('/api/service/create', authenticatUser, serviceController.create)
-// router.get('/api/service/show', serviceController.show)
+router.get('/api/service/list', authenticatUser, serviceController.list)
 
 module.exports = router

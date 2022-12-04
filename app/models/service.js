@@ -15,7 +15,7 @@ const serviceSchema = new Schema({
     },
     category : {
         type : String,
-        enum : ['painting','electrical','carpentry','plumbing'],
+        enum : ['painter','electrician','carpenter','plumber'],
         required : true
     },
     scheduledOn : {
@@ -30,9 +30,14 @@ const serviceSchema = new Schema({
     billAmount : {
         type : Number
     },
-    isCompleted : {
-        type : Boolean,
-        default : false
+    status : {
+        type : String,
+        enum : ['added', 'accepted', 'completed'],
+        default : 'added'
+    },
+    acceptedBy : {
+        type : Schema.Types.ObjectId,
+        ref : 'User'
     }
 }, {timestamps : true})
 
