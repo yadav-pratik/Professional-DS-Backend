@@ -18,7 +18,7 @@ const serviceSchema = new Schema({
         enum : ['painting','electrical','carpentry','plumbing'],
         required : true
     },
-    ScheduledOn : {
+    scheduledOn : {
         type : String,
         required : true
     },
