@@ -28,7 +28,8 @@ const serviceSchema = new Schema({
         maxLength : 400
     },
     billAmount : {
-        type : Number
+        type : Number,
+        default : 0
     },
     status : {
         type : String,

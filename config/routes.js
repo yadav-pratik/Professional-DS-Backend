@@ -21,5 +21,6 @@ router.get('/api/service/customerList', authenticatUser, serviceController.custo
 router.put('/api/service/customerUpdate/:id', authenticatUser, serviceController.customerUpdate)
 router.delete('/api/service/customerDelete/:id', authenticatUser, serviceController.customerDelete)
 router.get('/api/service/expertList', authenticatUser, authorizeExpert, serviceController.expertList)
+router.put('/api/service/expertUpdate/:id', authenticatUser, authorizeExpert, serviceController.expertUpdate)
 
 module.exports = router

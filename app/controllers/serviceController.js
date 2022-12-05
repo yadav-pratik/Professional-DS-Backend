@@ -17,14 +17,11 @@ serviceController.create = async (req, res) => {
 }
 
 serviceController.customerList = async (req, res) => {
-    const query = req.query
-    if(query.user === 'customer'){
-        try {
-            const services = await Service.find({user : req.tokenData._id})
-            res.json(services)
-        } catch (error) {
-            res.json(error)
-        }
+    try {
+        const services = await Service.find({user : req.tokenData._id})
+        res.json(services)
+    } catch (error) {
+        res.json(error)
     }
 }
 
@@ -65,28 +62,40 @@ serviceController.customerDelete = async (req, res) => {
 
 serviceController.expertList =  async (req, res) => {
     const query = req.query
-    if(query.user === 'expert' && query.filterBy === 'accepted'){
-        try {
-            const services = await Service.find({acceptedBy : req.tokenData._id, status : 'accepted'})
-            res.json(services)
-        } catch (error) {
-            res.json(error)            
-        }
-    } else if(query.user === 'expert' && query.filterBy === 'completed'){
-        try {
-            const services = await Service.find({acceptedBy : req.tokenData._id, status : 'completed'})
-            res.json(services)
-        } catch (error) {
-            res.json(error)            
-        }
-    } else if(query.user === 'expert'){
+    if(query.category){
         try {
             const services = await Service.find({category : query.category, status : 'added'})
             res.json(services)
         } catch (error) {
             res.json(error)            
         }
-    } 
+    } else if(query.filterBy){
+        try {
+            const services = await Service.find({acceptedBy : req.tokenData._id, status : query.filterBy})
+            res.json(services)
+        } catch (error) {
+            res.json(error)            
+        }
+    }
 }
+
+serviceController.expertUpdate = async (req, res) => {
+    const id = req.params.id
+    const query = req.query
+    const billAmount = req.body.billAmount
+    try {
+    const service = await Service.findOneAndUpdate({_id : id, acceptedBy : req.tokenData._id}, {status : query.status, acceptedBy : req.tokenData._id, billAmount}, {new : true})
+    if(service) {
+        res.json(service)
+    } else {
+        res.json({
+            notice : "Bad request"
+        })
+    }
+    } catch (error) {
+        res.json(error)
+    }
+}    
+
 
 module.exports = serviceController
