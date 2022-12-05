@@ -13,6 +13,11 @@ const reviewSchema = new Schema({
         ref : 'Service',
         required : true
     },
+    expert : {
+        type : Schema.Types.ObjectId,
+        ref : 'User',
+        required : true
+    },
     rating : {
         type : Number,
         required : true

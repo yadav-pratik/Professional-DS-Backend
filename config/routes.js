@@ -27,5 +27,7 @@ router.put('/api/service/expertUpdate/:id', authenticatUser, authorizeExpert, se
 //review apis
 
 router.post('/api/review/create', authenticatUser, reviewController.create)
+router.get('/api/review/userList', authenticatUser, reviewController.userList)
+router.get('/api/review/expertList', authenticatUser, reviewController.expertList)
 
 module.exports = router

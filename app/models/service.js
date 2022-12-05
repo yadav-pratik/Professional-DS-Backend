@@ -36,7 +36,7 @@ const serviceSchema = new Schema({
         enum : ['added', 'accepted', 'completed'],
         default : 'added'
     },
-    acceptedBy : {
+    expert : {
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
