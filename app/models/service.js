@@ -10,7 +10,7 @@ const serviceSchema = new Schema({
     },
     description : {
         type : String,
-        maxLength : 800,
+        maxLength : 400,
         required : true
     },
     category : {
@@ -25,7 +25,7 @@ const serviceSchema = new Schema({
     address : {
         type : String,
         required : true,
-        maxLength : 400
+        maxLength : 200
     },
     billAmount : {
         type : Number,
@@ -39,7 +39,11 @@ const serviceSchema = new Schema({
     acceptedBy : {
         type : Schema.Types.ObjectId,
         ref : 'User'
-    }
+    },
+    // review : {
+    //     type : Schema.Types.ObjectId,
+    //     ref : 'Review'
+    // }
 }, {timestamps : true})
 
 const Service = mongoose.model('Service', serviceSchema)

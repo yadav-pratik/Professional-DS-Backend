@@ -2,6 +2,7 @@ const express = require('express')
 
 const userController = require('../app/controllers/userController')
 const serviceController = require('../app/controllers/serviceController')
+const reviewController = require('../app/controllers/reviewController')
 
 const authenticatUser = require('../app/middlewares/authentication')
 const authorizeExpert = require('../app/middlewares/authorizeExpert')
@@ -22,5 +23,9 @@ router.put('/api/service/customerUpdate/:id', authenticatUser, serviceController
 router.delete('/api/service/customerDelete/:id', authenticatUser, serviceController.customerDelete)
 router.get('/api/service/expertList', authenticatUser, authorizeExpert, serviceController.expertList)
 router.put('/api/service/expertUpdate/:id', authenticatUser, authorizeExpert, serviceController.expertUpdate)
+
+//review apis
+
+router.post('/api/review/create', authenticatUser, reviewController.create)
 
 module.exports = router
