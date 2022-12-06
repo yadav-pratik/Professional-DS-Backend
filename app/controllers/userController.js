@@ -2,7 +2,6 @@ const User = require('../models/user')
 const { pick, omit } = require('lodash')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { findOneAndUpdate, findById } = require('../models/user')
 require('dotenv').config()
 
 const userController = {}

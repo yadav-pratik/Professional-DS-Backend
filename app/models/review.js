@@ -3,29 +3,35 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
-    user : {
-        type : Schema.Types.ObjectId,
-        ref : 'User',
-        required : true
-    },
     serviceRequest : {
         type : Schema.Types.ObjectId,
         ref : 'ServiceRequest',
         required : true
     },
-    expert : {
+    customer : {
+       user : {
         type : Schema.Types.ObjectId,
-        ref : 'User',
-        required : true
+        ref : 'User'
+       },
+       rating : {
+        type : Number
+       },
+       review : {
+        type : String
+       }
     },
-    rating : {
-        type : Number,
-        required : true
+    professional : {
+       user : {
+        type : Schema.Types.ObjectId,
+        ref : 'User'
+       },
+       rating : {
+        type : Number
+       },
+       review : {
+        type : String
+       }
     },
-    review : {
-        type : String,
-        maxLength : 400
-    }
 })
 
 const Review = mongoose.model('Review',reviewSchema)
