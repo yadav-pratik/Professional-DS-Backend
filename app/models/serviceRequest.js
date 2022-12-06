@@ -18,14 +18,9 @@ const serviceRequestSchema = new Schema({
         enum : ['painter','electrician','carpenter','plumber'],
         required : true
     },
-    scheduledOn : {
+    dateTime : {
         type : Date,
         required : true
-    },
-    address : {
-        type : String,
-        required : true,
-        maxLength : 200
     },
     billAmount : {
         type : Number,
@@ -40,10 +35,9 @@ const serviceRequestSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
-    // review : {
-    //     type : Schema.Types.ObjectId,
-    //     ref : 'Review'
-    // }
+    picture : {
+        type : String
+    }
 }, {timestamps : true})
 
 const ServiceRequest = mongoose.model('ServiceRequest', serviceRequestSchema)
