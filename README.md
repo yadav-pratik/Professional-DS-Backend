@@ -16,7 +16,7 @@ The server side of the Professional Doorstep services consists of NodeJS, Expres
 Clone the repository
 
 ```
-git clone https://github.com/yadav-pratik/Expert-DS-Backend.git
+git clone https://github.com/yadav-pratik/Professional-DS-Backend.git
 ```
 
 Go to the project directory
