@@ -13,6 +13,7 @@ const router = express.Router()
 
 router.post('/api/user/register', userController.register)
 router.post('/api/user/login', userController.login)
+router.get('/api/user/loginCount', authenticatUser, userController.loginCount)
 router.get('/api/user/account', authenticatUser, userController.account)
 
 //service Request apis
@@ -22,7 +23,7 @@ router.get('/api/service-request/customerList', authenticatUser, serviceRequestC
 router.put('/api/service-request/customerUpdate/:id', authenticatUser, serviceRequestController.customerUpdate)
 router.delete('/api/service-request/customerDelete/:id', authenticatUser, serviceRequestController.customerDelete)
 router.get('/api/service-request/professionalList', authenticatUser, authorizeProfessional, serviceRequestController.professionalList)
-router.put('/api/service-request/expertUpdate/:id', authenticatUser, authorizeProfessional, serviceRequestController.expertUpdate)
+router.put('/api/service-request/expertUpdate/:id', authenticatUser, authorizeProfessional, serviceRequestController.professionalUpdate)
 
 //review apis
 

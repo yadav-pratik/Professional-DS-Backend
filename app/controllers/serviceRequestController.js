@@ -60,7 +60,7 @@ serviceRequestController.customerDelete = async (req, res) => {
 
 //for experts
 
-serviceRequestController.expertList =  async (req, res) => {
+serviceRequestController.professionalList =  async (req, res) => {
     const query = req.query
     if(query.category){
         try {
@@ -79,7 +79,7 @@ serviceRequestController.expertList =  async (req, res) => {
     }
 }
 
-serviceRequestController.expertUpdate = async (req, res) => {
+serviceRequestController.professionalUpdate = async (req, res) => {
     const id = req.params.id
     const query = req.query
     const billAmount = req.body.billAmount

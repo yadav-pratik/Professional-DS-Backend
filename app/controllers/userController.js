@@ -2,6 +2,7 @@ const User = require('../models/user')
 const { pick, omit } = require('lodash')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { findOneAndUpdate, findById } = require('../models/user')
 require('dotenv').config()
 
 const userController = {}
@@ -38,10 +39,16 @@ userController.login = async (req, res) => {
         if(user){
             const match = await bcrypt.compare(body.password, user.password)
             if(match){
-                const token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_SECRET_KEY, {expiresIn : "7d"})
-                res.json({
-                    token : `Bearer ${token}`
-                })
+                try {
+                    const u = await User.findByIdAndUpdate(user._id, {$inc : {loginCount : 1}})
+                    const token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_SECRET_KEY, {expiresIn : "7d"})
+                    res.json({
+                        token : `Bearer ${token}`
+                    })
+                } catch (error) {
+                    res.json(error)
+                }
+               
             } else {
                 res.json({
                     notice : "Invalid email or password"
@@ -52,6 +59,17 @@ userController.login = async (req, res) => {
                 notice : "Invalid email or password"
             })
         }
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+userController.loginCount = async (req, res) => {
+    try {
+        const user = await User.findById(req.tokenData._id)
+        res.json({
+            loginCount : user.loginCount
+        })
     } catch (error) {
         res.json(error)
     }
