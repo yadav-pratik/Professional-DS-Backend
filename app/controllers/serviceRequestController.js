@@ -6,7 +6,7 @@ const serviceRequestController = {}
 //for customers
 
 serviceRequestController.create = async (req, res) => {
-    const body = pick(req.body, ['category', 'description', 'address', 'scheduledOn'])
+    const body = pick(req.body, ['category', 'description', 'dateTime','picture'])
     try {
         const service = new ServiceRequest({...body, user : req.tokenData._id})
         const s = await service.save()
