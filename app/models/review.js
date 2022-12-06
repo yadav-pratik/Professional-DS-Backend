@@ -8,9 +8,9 @@ const reviewSchema = new Schema({
         ref : 'User',
         required : true
     },
-    service : {
+    serviceRequest : {
         type : Schema.Types.ObjectId,
-        ref : 'Service',
+        ref : 'ServiceRequest',
         required : true
     },
     expert : {

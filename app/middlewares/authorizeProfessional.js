@@ -1,5 +1,5 @@
 const authorizeExpert = (req, res, next) => {
-    if(req.tokenData.role ===  'expert'){
+    if(req.tokenData.role ===  'professional'){
         next()
     } else {
         res.json({

@@ -19,7 +19,7 @@ const userSchema = new Schema({
                 return 'Invalid Email Format'
             }
         },        
-        unique : true,
+        unique : true
     },
     password : {
         type : String,
@@ -35,19 +35,26 @@ const userSchema = new Schema({
     },
     role : {
         type : String,
-        enum : ['customer','expert','admin'],
+        enum : ['customer','professional','admin'],
         default : 'customer',
     },
-    expertise : {
-        type : String,
-        enum : ['painter','electrical','plumber','carpenter'],
-    },
-    address : {
-        type : String,
-        default : null
-    },
+    expertise : [
+        {
+            title : {
+                type : String,
+                enum : ['plumber', 'electrician', 'carpenter', 'painter']
+            },
+            experience : {
+                type : Number
+            }
+        }
+    ],
     picture : {
         type : String
+    },
+    loginCount : {
+        type : Number,
+        default : 0
     }
 },{timestamps : true})
 

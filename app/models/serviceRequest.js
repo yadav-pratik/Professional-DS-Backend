@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const serviceSchema = new Schema({
+const serviceRequestSchema = new Schema({
     user : {
         type : Schema.Types.ObjectId,
         ref : 'User',
@@ -19,7 +19,7 @@ const serviceSchema = new Schema({
         required : true
     },
     scheduledOn : {
-        type : String,
+        type : Date,
         required : true
     },
     address : {
@@ -36,7 +36,7 @@ const serviceSchema = new Schema({
         enum : ['added', 'accepted', 'completed'],
         default : 'added'
     },
-    expert : {
+    professional : {
         type : Schema.Types.ObjectId,
         ref : 'User'
     },
@@ -46,6 +46,6 @@ const serviceSchema = new Schema({
     // }
 }, {timestamps : true})
 
-const Service = mongoose.model('Service', serviceSchema)
+const ServiceRequest = mongoose.model('ServiceRequest', serviceRequestSchema)
 
-module.exports = Service
+module.exports = ServiceRequest

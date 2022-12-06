@@ -7,7 +7,7 @@ require('dotenv').config()
 const userController = {}
 
 userController.register = async (req, res) => {
-    const body = pick(req.body, ['email','password','name','mobile','role','expertise','address','picture'])
+    const body = pick(req.body, ['email','password','name','mobile','role','expertise','picture'])
     if(body.role === 'admin'){
         res.json({
             notice : 'Bad Request'

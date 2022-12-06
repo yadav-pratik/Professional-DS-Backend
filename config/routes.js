@@ -1,11 +1,11 @@
 const express = require('express')
 
 const userController = require('../app/controllers/userController')
-const serviceController = require('../app/controllers/serviceController')
+const serviceRequestController = require('../app/controllers/serviceRequestController')
 const reviewController = require('../app/controllers/reviewController')
 
 const authenticatUser = require('../app/middlewares/authentication')
-const authorizeExpert = require('../app/middlewares/authorizeExpert')
+const authorizeProfessional = require('../app/middlewares/authorizeProfessional')
 
 const router = express.Router()
 
@@ -15,14 +15,14 @@ router.post('/api/user/register', userController.register)
 router.post('/api/user/login', userController.login)
 router.get('/api/user/account', authenticatUser, userController.account)
 
-//service apis
+//service Request apis
 
-router.post('/api/service/create', authenticatUser, serviceController.create)
-router.get('/api/service/customerList', authenticatUser, serviceController.customerList)
-router.put('/api/service/customerUpdate/:id', authenticatUser, serviceController.customerUpdate)
-router.delete('/api/service/customerDelete/:id', authenticatUser, serviceController.customerDelete)
-router.get('/api/service/expertList', authenticatUser, authorizeExpert, serviceController.expertList)
-router.put('/api/service/expertUpdate/:id', authenticatUser, authorizeExpert, serviceController.expertUpdate)
+router.post('/api/service-request/create', authenticatUser, serviceRequestController.create)
+router.get('/api/service-request/customerList', authenticatUser, serviceRequestController.customerList)
+router.put('/api/service-request/customerUpdate/:id', authenticatUser, serviceRequestController.customerUpdate)
+router.delete('/api/service-request/customerDelete/:id', authenticatUser, serviceRequestController.customerDelete)
+router.get('/api/service-request/professionalList', authenticatUser, authorizeProfessional, serviceRequestController.professionalList)
+router.put('/api/service-request/expertUpdate/:id', authenticatUser, authorizeProfessional, serviceRequestController.expertUpdate)
 
 //review apis
 
