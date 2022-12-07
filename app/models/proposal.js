@@ -17,7 +17,11 @@ const proposalSchema = new Schema({
     },
     status : {
         type : String,
-        enum : ['pending','accepted'],
+        enum : ['pending','accepted','rejected'],
         default : 'pending'
     }
 })
+
+const Proposal = mongoose.model('Proposal', proposalSchema)
+
+module.exports = Proposal

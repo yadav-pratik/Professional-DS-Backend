@@ -79,23 +79,23 @@ serviceRequestController.professionalList =  async (req, res) => {
     }
 }
 
-serviceRequestController.professionalUpdate = async (req, res) => {
-    const id = req.params.id
-    const query = req.query
-    const billAmount = req.body.billAmount
-    try {
-    const service = await ServiceRequest.findOneAndUpdate({_id : id, acceptedBy : req.tokenData._id}, {status : query.status, acceptedBy : req.tokenData._id, billAmount}, {new : true})
-    if(service) {
-        res.json(service)
-    } else {
-        res.json({
-            notice : "Bad request"
-        })
-    }
-    } catch (error) {
-        res.json(error)
-    }
-}    
+// serviceRequestController.professionalUpdate = async (req, res) => {
+//     const id = req.params.id
+//     const query = req.query
+//     const billAmount = req.body.billAmount
+//     try {
+//     const service = await ServiceRequest.findOneAndUpdate({_id : id, acceptedBy : req.tokenData._id}, {status : query.status, acceptedBy : req.tokenData._id, billAmount}, {new : true})
+//     if(service) {
+//         res.json(service)
+//     } else {
+//         res.json({
+//             notice : "Bad request"
+//         })
+//     }
+//     } catch (error) {
+//         res.json(error)
+//     }
+// }    
 
 
 module.exports = serviceRequestController

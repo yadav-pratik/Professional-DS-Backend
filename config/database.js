@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const configureDB = () => {
-    mongoose.connect('mongodb://127.0.0.1:27017/expertDS')
+    mongoose.connect('mongodb://127.0.0.1:27017/proDS')
         .then(()=>{
             console.log('connected to db')
         })
