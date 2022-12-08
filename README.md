@@ -1,7 +1,7 @@
 
-# Expert Doorstep Services : Backend
+# Professional Doorstep Services : Backend
 
-The server side of the Expert Doorstep services consists of NodeJS, ExpressJS, Mongoose and MongoDB. It is created based on MVC architecture. 
+The server side of the Professional Doorstep services consists of NodeJS, ExpressJS, Mongoose and MongoDB. It is created based on MVC architecture. 
 
 ## Features
 
@@ -16,7 +16,7 @@ The server side of the Expert Doorstep services consists of NodeJS, ExpressJS, M
 Clone the repository
 
 ```
-git clone https://github.com/yadav-pratik/Expert-DS-Backend.git
+git clone https://github.com/yadav-pratik/Professional-DS-Backend.git
 ```
 
 Go to the project directory
