@@ -38,8 +38,8 @@ router.put('/api/proposal/reject/:id', authenticatUser, proposalController.rejec
 //review apis
 
 router.post('/api/review/create', authenticatUser, reviewController.create)
-router.get('/api/review/userList', authenticatUser, reviewController.userList)
-router.get('/api/review/expertList', authenticatUser, reviewController.expertList)
+// router.get('/api/review/userList', authenticatUser, reviewController.userList)
+router.get('/api/review/professional-list', authenticatUser, authorizeProfessional, reviewController.professionalList)
 
 //
 

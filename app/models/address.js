@@ -21,13 +21,16 @@ const addressSchema = new Schema({
         type : String
     },
     city : {
-        type : String
+        type : String,
+        required : true
     },
     state : {
-        type : String
+        type : String,
+        required : true
     },
     pincode : {
-        type : String
+        type : String,
+        required : true
     }
 }, {timestamps : true})
 

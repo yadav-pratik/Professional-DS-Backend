@@ -17,8 +17,8 @@ reviewController.create = async (req, res) => {
 
 reviewController.userList = async (req, res) => {
     try {
-        const reviews = await Review.find({user : req.tokenData._id})
-        res.json(review)
+        const reviews = await Review.find({customer : {user : req.tokenData._id}})
+        res.json(reviews)
     } catch (error) {
         res.json(error)
     }
@@ -26,9 +26,11 @@ reviewController.userList = async (req, res) => {
 
 //for expert
 
-reviewController.expertList = async (req, res) => {
+reviewController.professionalList = async (req, res) => {
     try {
-        const reviews = await Review.find({expert : req.tokenData._id})
+        const reviews = await Review.find({professional : {user : req.tokenData._id}})
+        console.log(req.tokenData._id)
+        console.log(reviews)
         res.json(reviews)
     } catch (error) {
         res.json(error)
