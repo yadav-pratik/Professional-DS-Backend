@@ -1,12 +1,14 @@
 const express = require('express')
 
 const userController = require('../app/controllers/userController')
+const addressController = require('../app/controllers/addressController')
 const serviceRequestController = require('../app/controllers/serviceRequestController')
 const reviewController = require('../app/controllers/reviewController')
 const proposalController = require('../app/controllers/proposalController')
 
 const authenticatUser = require('../app/middlewares/authentication')
 const authorizeProfessional = require('../app/middlewares/authorizeProfessional')
+const addressCheck = require('../app/middlewares/addressCheck')
 
 const router = express.Router()
 
@@ -16,6 +18,13 @@ router.post('/api/user/register', userController.register)
 router.post('/api/user/login', userController.login)
 router.get('/api/user/loginCount', authenticatUser, userController.loginCount)
 router.get('/api/user/account', authenticatUser, userController.account)
+
+//address apis
+
+router.post('/api/address/create', authenticatUser, addressCheck, addressController.create)
+router.get('/api/address/list', authenticatUser, addressController.list)
+router.put('/api/address/update/:id', authenticatUser, addressController.update)
+router.delete('/api/address/delete/:id', authenticatUser, addressController.delete)
 
 //service Request apis
 
