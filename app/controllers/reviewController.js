@@ -1,15 +1,38 @@
 const Review = require('../models/review')
+const { pick, omit } = require('lodash')
 
 const reviewController = {}
 
 //for customer
 
 reviewController.create = async (req, res) => {
-    const body = req.body
+    const body = pick(req.body, ['serviceRequest', 'customer', 'professional'])
     try {
-        const review = new Review({...body, user : req.tokenData._id})
+        const review = new Review({ ...body })
         const r = await review.save()
         res.json(r)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+reviewController.customerReview = async (req, res) => {
+    const body = pick(req.body, ['serviceRequest', 'customer'])
+    try {
+        const review = await Review.findOneAndUpdate({serviceRequest : body.serviceRequest, 'professional.user' : req.tokenData._id}, body, {new : true})
+        const r = JSON.parse(JSON.stringify(review))
+        res.json(omit(r, ['professional']))
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+reviewController.professionalReview = async (req, res) => {
+    const body = pick(req.body, ['serviceRequest', 'professional'])
+    try {
+        const review = await Review.findOneAndUpdate({serviceRequest : body.serviceRequest, 'customer.user' : req.tokenData._id}, body, {new : true})
+        const r = JSON.parse(JSON.stringify(review))
+        res.json(omit(r, ['customer']))
     } catch (error) {
         res.json(error)
     }

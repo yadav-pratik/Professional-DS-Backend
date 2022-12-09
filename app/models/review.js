@@ -5,8 +5,7 @@ const Schema = mongoose.Schema
 const reviewSchema = new Schema({
     serviceRequest : {
         type : Schema.Types.ObjectId,
-        ref : 'ServiceRequest',
-        required : true
+        ref : 'ServiceRequest'
     },
     customer : {
        user : {
