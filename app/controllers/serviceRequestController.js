@@ -25,7 +25,7 @@ serviceRequestController.customerList = async (req, res) => {
     }
 }
 
-serviceRequestController.customerUpdate = async (req, res) => {
+serviceRequestController.update = async (req, res) => {
     const id = req.params.id
     const body = req.body
     try {
@@ -42,7 +42,7 @@ serviceRequestController.customerUpdate = async (req, res) => {
     }
 }
 
-serviceRequestController.customerDelete = async (req, res) => {
+serviceRequestController.delete = async (req, res) => {
     const id = req.params.id
     try {
         const service = await ServiceRequest.findOneAndDelete({_id : id, user : req.tokenData._id})
@@ -55,6 +55,34 @@ serviceRequestController.customerDelete = async (req, res) => {
         }
     } catch (error) {
         res.json(error)
+    }
+}
+
+serviceRequestController.allot = async (req, res) => {
+    const professional = req.body.professional
+    const id = req.params.id
+    try {
+        const service = await ServiceRequest.findOneAndUpdate({_id : id, user : req.tokenData._id}, {status : 'alloted', professional}, {new : true})
+        res.json(service)
+    } catch (error) {
+        res.json(error)        
+    }
+}
+
+serviceRequestController.complete = async (req, res) => {
+    const billAmount = req.body.billAmount
+    const id = req.params.id
+    try {
+        const service = await ServiceRequest.findOneAndUpdate({_id : id, professional : req.tokenData._id}, {status : 'completed', billAmount}, {new : true})
+        if(service){
+            res.json(service)
+        } else {
+            res.json({
+                notice : "Bad Request"
+            })
+        }
+    } catch (error) {
+        res.json(error)        
     }
 }
 
@@ -78,24 +106,5 @@ serviceRequestController.professionalList =  async (req, res) => {
         }
     }
 }
-
-// serviceRequestController.professionalUpdate = async (req, res) => {
-//     const id = req.params.id
-//     const query = req.query
-//     const billAmount = req.body.billAmount
-//     try {
-//     const service = await ServiceRequest.findOneAndUpdate({_id : id, acceptedBy : req.tokenData._id}, {status : query.status, acceptedBy : req.tokenData._id, billAmount}, {new : true})
-//     if(service) {
-//         res.json(service)
-//     } else {
-//         res.json({
-//             notice : "Bad request"
-//         })
-//     }
-//     } catch (error) {
-//         res.json(error)
-//     }
-// }    
-
 
 module.exports = serviceRequestController

@@ -28,7 +28,7 @@ const serviceRequestSchema = new Schema({
     },
     status : {
         type : String,
-        enum : ['added', 'accepted', 'completed'],
+        enum : ['added', 'alloted', 'completed'],
         default : 'added'
     },
     professional : {
