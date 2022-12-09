@@ -7,7 +7,7 @@ require('dotenv').config()
 const userController = {}
 
 userController.register = async (req, res) => {
-    const body = pick(req.body, ['email','password','name','mobile','role','expertise','picture'])
+    const body = pick(req.body, ['email','password','name','mobile','role'])
     if(body.role === 'admin'){
         res.json({
             notice : 'Bad Request'
@@ -82,7 +82,17 @@ userController.account = async (req, res) => {
     } catch (error) {
         res.json(error)
     }
-    
+}
+
+userController.update = async (req, res) => {
+    const body = pick(req.body, ['email','name','mobile','expertise','picture'])
+    try {
+        const user = await User.findByIdAndUpdate(req.tokenData._id, body, {new : true, runValidators : true})
+        const userObj = JSON.parse(JSON.stringify(user))
+        res.json(omit(userObj, ['password', 'loginCount']))
+    } catch (error) {
+        res.json(error)
+    }
 }
 
 module.exports = userController

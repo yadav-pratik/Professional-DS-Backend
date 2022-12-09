@@ -18,6 +18,7 @@ router.post('/api/user/register', userController.register)
 router.post('/api/user/login', userController.login)
 router.get('/api/user/loginCount', authenticatUser, userController.loginCount)
 router.get('/api/user/account', authenticatUser, userController.account)
+router.put('/api/user/update', authenticatUser, userController.update)
 
 //address apis
 
