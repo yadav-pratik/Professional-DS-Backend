@@ -99,7 +99,7 @@ serviceRequestController.professionalList =  async (req, res) => {
         }
     } else if(query.filterBy){
         try {
-            const services = await ServiceRequest.find({acceptedBy : req.tokenData._id, status : query.filterBy})
+            const services = await ServiceRequest.find({professional : req.tokenData._id, status : query.filterBy})
             res.json(services)
         } catch (error) {
             res.json(error)            
