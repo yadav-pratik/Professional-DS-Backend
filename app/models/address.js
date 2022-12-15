@@ -9,10 +9,12 @@ const addressSchema = new Schema({
         required : true
     },
     doorNumber : {
-        type : String
+        type : String,
+        required : true
     },
     area : {
-        type : String
+        type : String,
+        required : true
     },
     street : {
         type : String
