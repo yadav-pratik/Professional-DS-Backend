@@ -27,7 +27,7 @@ addressController.update = async (req, res) => {
     const id = req.params.id
     const body = req.body
     try {
-        const address = await Address.findOneAndUpdate({_id : id, user : req.tokenData._id}, body, {new : true})
+        const address = await Address.findOneAndUpdate({_id : id, user : req.tokenData._id}, body, {new : true, runValidators : true})
         console.log(address)
         if(address){
             res.json(address)
