@@ -16,7 +16,7 @@ const router = express.Router()
 
 router.post('/api/user/register', userController.register)
 router.post('/api/user/login', userController.login)
-router.get('/api/user/loginCount', authenticateUser, userController.loginCount)
+router.get('/api/user/login-count', authenticateUser, userController.loginCount)
 router.get('/api/user/account', authenticateUser, userController.account)
 router.put('/api/user/update', authenticateUser, userController.update)
 
@@ -25,6 +25,7 @@ router.put('/api/user/update', authenticateUser, userController.update)
 router.post('/api/address/create', authenticateUser, addressCheck, addressController.create)
 router.get('/api/address/list', authenticateUser, addressController.list)
 router.put('/api/address/update/:id', authenticateUser, addressController.update)
+router.put('/api/address/default/:id', authenticateUser, addressController.default)
 router.delete('/api/address/delete/:id', authenticateUser, addressController.delete)
 
 //service Request apis

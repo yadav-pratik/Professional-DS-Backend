@@ -28,7 +28,6 @@ addressController.update = async (req, res) => {
     const body = req.body
     try {
         const address = await Address.findOneAndUpdate({_id : id, user : req.tokenData._id}, body, {new : true, runValidators : true})
-        console.log(address)
         if(address){
             res.json(address)
         } else {
@@ -36,6 +35,18 @@ addressController.update = async (req, res) => {
                 notice : "Bad Request"
             })
         }
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+addressController.default = async (req, res) => {
+    const id = req.params.id
+    try {
+        const defaultAddress = await Address.findByIdAndUpdate(id, {defaultAddress : true}, {new : true})
+        const updateStatus = await Address.updateMany({_id : { $not : {$eq : id}}, user : req.tokenData._id}, {defaultAddress : false})
+        const addresses = await Address.find({user : req.tokenData._id})
+        res.json(addresses)
     } catch (error) {
         res.json(error)
     }

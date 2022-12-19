@@ -33,6 +33,10 @@ const addressSchema = new Schema({
     pincode : {
         type : String,
         required : true
+    },
+    defaultAddress : {
+        type : Boolean,
+        default : false
     }
 }, {timestamps : true})
 
