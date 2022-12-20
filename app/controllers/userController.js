@@ -40,7 +40,7 @@ userController.login = async (req, res) => {
             if(match){
                 try {
                     const u = await User.findByIdAndUpdate(user._id, {$inc : {loginCount : 1}})
-                    const token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_SECRET_KEY, {expiresIn : "7d"})
+                    const token = jwt.sign({_id : user._id, role : user.role}, process.env.JWT_SECRET_KEY, {expiresIn : '10d'})
                     res.json({
                         success : 'Logged In Successfully',
                         token : `Bearer ${token}`
