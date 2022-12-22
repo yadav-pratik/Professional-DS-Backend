@@ -19,8 +19,7 @@ const serviceRequestSchema = new Schema({
         required : true
     },
     dateTime : {
-        type : Date,
-        required : true
+        type : Date
     },
     billAmount : {
         type : Number,
@@ -40,7 +39,8 @@ const serviceRequestSchema = new Schema({
     },
     address : {
         type : Schema.Types.ObjectId,
-        ref : 'Address'
+        ref : 'Address',
+        required : true
     }
 }, {timestamps : true})
 
