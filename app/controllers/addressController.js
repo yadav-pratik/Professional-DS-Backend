@@ -5,7 +5,8 @@ const addressController = {}
 addressController.create = async (req, res) => {
     const body = req.body
     try {
-        const address = new Address({...body, user : req.tokenData._id})
+        const addresses = await Address.find({user : req.tokenData._id})
+        const address = new Address({...body, user : req.tokenData._id, defaultAddress : addresses.length === 0 ? true : false })
         const a = await address.save()
         res.json(a)
     } catch (error) {
