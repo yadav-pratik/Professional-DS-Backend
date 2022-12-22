@@ -37,6 +37,10 @@ const serviceRequestSchema = new Schema({
     },
     picture : {
         type : String
+    },
+    address : {
+        type : Schema.Types.ObjectId,
+        ref : 'Address'
     }
 }, {timestamps : true})
 

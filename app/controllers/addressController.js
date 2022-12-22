@@ -4,7 +4,6 @@ const addressController = {}
 
 addressController.create = async (req, res) => {
     const body = req.body
-    console.log(body)
     try {
         const address = new Address({...body, user : req.tokenData._id})
         const a = await address.save()
