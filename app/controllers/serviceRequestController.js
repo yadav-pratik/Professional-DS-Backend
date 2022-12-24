@@ -35,7 +35,7 @@ serviceRequestController.update = async (req, res) => {
     const id = req.params.id
     const body = req.body
     try {
-        const service = await ServiceRequest.findOneAndUpdate({_id : id, user : req.tokenData._id}, body, {new : true, runValidators : true})
+        const service = await ServiceRequest.findOneAndUpdate({_id : id, user : req.tokenData._id}, body, {new : true, runValidators : true}).populate('address')
         if(service){
             res.json(service)
         } else {
