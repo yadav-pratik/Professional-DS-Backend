@@ -17,8 +17,14 @@ serviceRequestController.create = async (req, res) => {
 }
 
 serviceRequestController.customerList = async (req, res) => {
+    const status = req.query.status
+    let services
     try {
-        const services = await ServiceRequest.find({user : req.tokenData._id})
+        if(status === 'all'){
+            services = await ServiceRequest.find({user : req.tokenData._id})
+        } else {
+            services = await ServiceRequest.find({user : req.tokenData._id, status : status})
+        }
         res.json(services)
     } catch (error) {
         res.json(error)
