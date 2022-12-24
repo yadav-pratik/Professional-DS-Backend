@@ -21,9 +21,9 @@ serviceRequestController.customerList = async (req, res) => {
     let services
     try {
         if(status === 'all'){
-            services = await ServiceRequest.find({user : req.tokenData._id}).sort({createdAt : -1})
+            services = await ServiceRequest.find({user : req.tokenData._id}).populate('address').sort({createdAt : -1})
         } else {
-            services = await ServiceRequest.find({user : req.tokenData._id, status : status}).sort({createdAt : -1})
+            services = await ServiceRequest.find({user : req.tokenData._id, status : status}).populate('address').sort({createdAt : -1})
         }
         res.json(services)
     } catch (error) {
