@@ -4,7 +4,7 @@ const { pick } = require('lodash')
 const proposalController = {}
 
 proposalController.create = async (req, res) => {
-    const body = pick(req.body, ['serviceRequest', 'amount'])
+    const body = pick(req.body, ['serviceRequest', 'amount', 'date'])
     try {
         const proposal = new Proposal({...body, professional : req.tokenData._id})
         const p = await proposal.save()
@@ -38,7 +38,7 @@ proposalController.delete = async (req, res) => {
 proposalController.customerList = async (req, res) => {
     const sId = req.params.sId
     try {
-        const proposals = await Proposal.find({serviceRequest : sId})
+        const proposals = await Proposal.find({serviceRequest : sId}).populate('professional')
         res.json(proposals)
     } catch (error) {
         res.json(error)

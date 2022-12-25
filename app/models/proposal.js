@@ -5,13 +5,15 @@ const Schema = mongoose.Schema
 const proposalSchema = new Schema({
     professional : {
         type : Schema.Types.ObjectId,
+        ref : 'User',
         required : true
     },
     serviceRequest : {
         type : Schema.Types.ObjectId,
+        ref : 'ServiceReques',
         required : true 
     },
-    data : {
+    date : {
         type : Date,
         required : true
     },
